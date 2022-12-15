@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyleComponent = createGlobalStyle`
+  body {
+    padding-top: 50px;
+    background-color: #d693c41f;
+  }
   img {
     display: block;
     max-width: 100%;

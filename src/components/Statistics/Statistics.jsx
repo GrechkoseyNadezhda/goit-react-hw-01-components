@@ -1,18 +1,42 @@
+import PropTypes from 'prop-types';
+
+import { colors } from 'servise/colors';
+import {
+  Section,
+  Title,
+  List,
+  Item,
+  Label,
+  Percentage,
+} from './Statistics.styled';
+
 export const Statistics = ({ title, stats }) => {
   return (
-    <section class="statistics">
-      <h2 class="title">{title && 'Upload stats'}</h2>
+    <Section>
+      {title && <Title>{title}</Title>}
 
-      <ul class="stat-list">
-        {stats.map(({ id, label, percentage }) => {
+      <List>
+        {stats.map(({ id, label, percentage }, index) => {
+          const colorItem = colors[index];
           return (
-            <li class="item" key={id}>
-              <span class="label">{label}</span>
-              <span class="percentage">{percentage}</span>
-            </li>
+            <Item key={id} color={colorItem}>
+              <Label>{label}</Label>
+              <Percentage>{percentage}%</Percentage>
+            </Item>
           );
         })}
-      </ul>
-    </section>
+      </List>
+    </Section>
   );
+};
+
+Statistics.propTypes = {
+  title: PropTypes.string,
+  stats: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      percentage: PropTypes.number.isRequired,
+    }).isRequired
+  ).isRequired,
 };
